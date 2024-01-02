@@ -1,3 +1,1 @@
-# website-test
-
-Playing around with HTML/CSS basics
+# Building Websites With HTML, CSS, and JavaScript: Getting Started

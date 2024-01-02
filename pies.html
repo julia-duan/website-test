@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css" type="text/css">
+    <title>Pies | Bethany's Pie Shop</title>
+    <style></style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside><img src="images/logo.png" alt="Bethany's Pie Shop"></aside>
+        <article>
+            <sections class="columns-desktop">
+            <div class="pie">
+                <img src="images/apple-pie.png" alt="Apple Pie">
+                <div class="columns">
+                    <div class="title">Apple Pie</div>
+                    <div class="price">$12.95</div>
+                </div>
+                <p class="desc">Our Famous Apple Pie</p>
+                <button data-order="apple-pie">Order</button>
+            </div>
+            <div class="pie">
+                <img src="images/cherry-pie.png" alt="Cherry Pie">
+                <div class="columns">
+                    <div class="title">Cherry Pie</div>
+                    <div class="price">$15.95</div>
+                </div>
+                <p class="desc">A Summer Classic</p>
+                <button data-order="cherry-pie">Order</button>
+            </div>
+            </sections>
+        </article>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pies.html">Pies</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+<script>
+    window.addEventListener("DOMContentLoaded", function(e) {
+        const orderButtons = document.querySelectorAll("button[data-order]");
+
+        orderButtons.forEach(function(button) {
+            button.addEventListener("click", function(e) { // forgot this the first time
+                const button = e.currentTarget;
+                const container = button.parentNode;
+
+                // making an object literal to save information neatly
+                const order = {
+                    id: button.getAttribute("data-order"),
+                    title: container.querySelector(".title").innerText,
+                    price: container.querySelector(".price").innerText,
+                    desc: container.querySelector(".desc").innerText
+                }
+                
+                // using the local storage API to actually save info
+                // only sets strings, so have to convert object literal--> str
+                // also known as serialization
+                localStorage.setItem("order", JSON.stringify(order));
+                // forwards to ordering page:
+                const url = window.location.href.replace("pies.html", "order.html");
+                window.location.href = url;
+            });
+        });
+    });
+</script>
+</html>
